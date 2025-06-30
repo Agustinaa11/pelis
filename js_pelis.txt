@@ -1,0 +1,67 @@
+import { useState } from 'react';
+import "./App.css";
+
+
+const API_KEY = 'd5ffe3fa1c37f7c1de880742ed48a111';
+
+export default function App() {
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [userRatings, setUserRatings] = useState({});
+
+  const searchMovies = async () => {
+    if (!query) return;
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
+    );
+    const data = await response.json();
+    setMovies(data.results);
+  };
+
+  const handleRating = (movieId, rating) => {
+    setUserRatings({ ...userRatings, [movieId]: rating });
+  };
+
+  return (
+    <div className="app">
+      <h1>Películas</h1>
+      <div className="search-box">
+        <input
+          type="text"
+          placeholder="Buscar"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button onClick={searchMovies}>Buscar</button>
+      </div>
+      <div className="movies">
+        {movies.map((movie) => (
+          <div className="movie-card" key={movie.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h3>{movie.title}</h3>
+            <p>Rating: ⭐ {movie.vote_average}</p>
+            <div className="stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={
+                    userRatings[movie.id] >= star ? 'star active' : 'star'
+                  }
+                  onClick={() => handleRating(movie.id, star)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            {userRatings[movie.id] && (
+              <p className="user-rating">{userRatings[movie.id]} ⭐</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
