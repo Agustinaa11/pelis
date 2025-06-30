@@ -1,0 +1,72 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background-color: #f13c97;
+  color: #fff;
+  text-align: center;
+}
+
+.app {
+  padding: 20px;
+}
+
+.search-box {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f09bdd;
+  color: white;
+  cursor: pointer;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.movie-card {
+  background-color: #ee76ca;
+  border-radius: 10px;
+  padding: 10px;
+  width: 200px;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.stars {
+  margin-top: 5px;
+}
+
+.star {
+  font-size: 20px;
+  cursor: pointer;
+  color: gray;
+}
+
+.star.active {
+  color: gold;
+}
+
+.user-rating {
+  font-size: 14px;
+  color: #aaa;
+  margin-top: 5px;
+}
+
